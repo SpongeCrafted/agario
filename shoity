@@ -1,0 +1,137 @@
+var player;
+
+//defines delay time
+var DELAY = 50;
+//defines square
+var square;
+
+
+//for moving square
+var dx = 0;
+var dy = 5;
+function start(){
+    
+    //print canvas dimensions
+    var x = getWidth();
+    println("x: " + x);
+    var y = getHeight();
+    println("y: " + y);
+    
+    //circleHealth();
+    
+    //defines player
+    //var squareX = square.getX();
+	player = new Circle(15);
+	player.setColor(Randomizer.nextColor());
+	player.setPosition(getWidth()/2, getHeight()/2);
+	add(player);
+	//if(squareX > getHeight()){
+	//    square.move(5,5);
+	//}
+	
+	//sets timer for walls
+	setTimer(draw, 100);
+	
+	setTimer(move,25);
+	
+	//initiates movements for player
+    keyDownMethod(keyDown);
+    
+    //for enemy squares
+    square = new Rectangle(20, 20);
+    square.setPosition(Randomizer.nextInt(0,400), 5);
+    square.setColor(Randomizer.nextColor());
+    add(square);
+}
+
+function move(){
+    square.move(dx,dy);
+}
+//timer for game / collision
+function draw(){
+	checkWalls();
+}
+//defines player boundaries
+function checkWalls(){
+    
+    //right wall
+	if(player.getX() + player.getRadius() > getWidth()){
+		player.move(-3,0);
+	}
+	//left wall
+	if(player.getX() - player.getRadius() < 0){
+		player.move(3,0);
+	}
+	
+	//bottom wall
+	if(player.getY() + player.getRadius() > getHeight()){
+	    player.move(0,-3);
+	}
+	//top wall
+	if(player.getY() - player.getRadius() < 0){
+	    player.move(0,3);
+	}
+}
+//defines how player moves
+function keyDown(e){
+    if (e.keyCode == Keyboard.letter("A") /*&& e.keyCode == Keyboard.letter("W")*/){
+        player.move(-5,0);
+    }
+    if (e.keyCode == Keyboard.letter("D")){
+        player.move(5,0);
+    }
+    if (e.keyCode == Keyboard.letter("W")){
+        player.move(0,-5);
+    }
+    if (e.keyCode == Keyboard.letter("S")){
+        player.move(0,5);
+    }
+}   
+
+
+/*
+//defines enemy
+function badGuysAndSize(){
+    var playerR = player.getRadius();
+    enemy = new Circle(20);
+    enemy.setPosition(100 , 150);
+    enemy.setColor(Color.red);
+    add(enemy); 
+    var enemyR = enemy.getRadius();
+    //enemy collision
+    if(player.getX() == enemy.getX()){
+        if(player.getY() == enemy.getY()+ -35){
+            player.move(0,-20);
+          //  if(playerR > enemyR){
+           //     remove(enemy);
+           //     playerR = player.getRadius() + enemyR();
+           // }
+        }
+        
+        // enemy collision system
+        if(player.getY() == enemy.getY() + 35){
+            player.move(0,20);
+           // if(playerR > enemyR){
+             //   remove(enemy);
+               // playerR = player.getRadius() + 20;
+            //}
+        }
+    }
+    if(player.getY() == enemy.getY()){
+        if(player.getX() == enemy.getX()+ -35){
+            player.move(-20,0);
+            //if(playerR > enemyR){
+                //remove(enemy);
+               // playerR = player.getRadius() + enemyR();
+           // }
+        }
+        if(player.getX() == enemy.getX()+ 35){
+            player.move(20,0);
+            //if(playerR > enemyR){
+             //   remove(enemy);
+              //  playerR = player.getRadius() + enemyR();
+           // }
+        }
+    }
+} 
+*/
