@@ -98,6 +98,7 @@ function badGuysAndSize(){
     enemy.setColor(Color.red);
     add(enemy); 
     var enemyR = enemy.getRadius();
+    
     //enemy collision
     if(player.getX() == enemy.getX()){
         if(player.getY() == enemy.getY()+ -35){
