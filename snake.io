@@ -1,6 +1,5 @@
 var player = new Circle(10);
 
-
 function start(){
     setUpGame();
 }
@@ -34,31 +33,54 @@ function setBackground(){
 var A = 0;
 function playerMove(e){
     if(e.keyCode == Keyboard.letter("A")){
-        A + 1;
         println(A);
-        stopTimer(playerActiveW);
-        stopTimer(playerActiveD);
-        stopTimer(playerActiveS);
-        setTimer(playerActiveA, 10);
+        timerA();
+        A++;
     }
     if(e.keyCode == Keyboard.letter("W")){
-        stopTimer(playerActiveD);
-        stopTimer(playerActiveS);
-        stopTimer(playerActiveA);
-        setTimer(playerActiveW, 10);
+        println(A);
+        timerB();
+        A++;
     }
     if(e.keyCode == Keyboard.letter("D")){
-        stopTimer(playerActiveW);
-        stopTimer(playerActiveA);
-        stopTimer(playerActiveS);
-        setTimer(playerActiveD, 10);
+        timerC();
+        println(A);
+        A++;
     }
     if(e.keyCode == Keyboard.letter("S")){
-        setTimer(playerActiveS, 10);
-        stopTimer(playerActiveA);
-        stopTimer(playerActiveW);
-        stopTimer(playerActiveD);
+        timerD();
+        println(A);
+        A++;
     }
+}
+
+// These functions are for the Start and Stop timers.
+function timerA(){
+    stopTimer(playerActiveW);
+    stopTimer(playerActiveD);
+    stopTimer(playerActiveS);
+    setTimer(playerActiveA, 10);
+}
+
+function timerB(){
+    stopTimer(playerActiveD);
+    stopTimer(playerActiveS);
+    stopTimer(playerActiveA);
+    setTimer(playerActiveW, 10);
+}
+
+function timerC(){
+    stopTimer(playerActiveW);
+    stopTimer(playerActiveA);
+    stopTimer(playerActiveS);
+    setTimer(playerActiveD, 10);
+}
+
+function timerD(){
+    setTimer(playerActiveS, 10);
+    stopTimer(playerActiveA);
+    stopTimer(playerActiveW);
+    stopTimer(playerActiveD);
 }
 //These functions are for a constant move without having to hold down a button like in the actual snake.io
 function playerActiveA(){
